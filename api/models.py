@@ -39,8 +39,8 @@ class UserProfile(models.Model):
 
 
 class AddAnimal(models.Model):
-	animal_type = models.CharField(max_length=50)
-	name  = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+	name  = models.CharField(max_length=50)
 	tag_no = models.IntegerField()
+	animal_type = models.CharField(max_length=50)
 	dob = models.DateField(auto_now=False, auto_now_add=False)
 	stage = models.CharField(max_length=50)

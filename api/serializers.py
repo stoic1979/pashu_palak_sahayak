@@ -14,5 +14,5 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
 class AddAnimalSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AddAnimal
-        fields = ( 'name', 'type','tag_no','dob','stage',)
+        fields = ( 'name', 'animal_type','tag_no','dob','stage',)
     
