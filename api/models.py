@@ -16,9 +16,10 @@ from django.dispatch import receiver
 
 
 class UserProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
-	mobile_no = models.CharField(max_length=10,null=True,blank=True )
-	state = models.CharField(max_length=100,null=True,blank=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+	mobile_no = models.CharField(max_length=10, null=True, blank=True)
+	otp_number = models.CharField(max_length=10, null=True,blank=True )
+	state = models.CharField(max_length=100, null=True,blank=True)
 	district = models.CharField(max_length=100,null=True,blank=True)
 	tehsil = models.CharField(max_length=100,null=True,blank=True)
 	village = models.CharField(max_length=100,null=True,blank=True)

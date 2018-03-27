@@ -3,7 +3,7 @@ from api.models import UserProfile,AddAnimal
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('mobile_no', 'state', 'district', 'village','tehsil',)
+    list_display = ('mobile_no', 'state', 'district', 'village','tehsil', 'otp_number')
 admin.site.register(UserProfile, UserProfileAdmin)
 
 

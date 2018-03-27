@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse, JsonResponse
-from rest_framework import viewsets
+from rest_framework import viewsets 
 
 from api.models import UserProfile,AddAnimal
 from .serializers import UserProfileSerializer,AddAnimalSerializer
@@ -13,10 +13,11 @@ from rest_framework import serializers
 from rest_framework.renderers import JSONRenderer
 
 from api.utils import rand_str
-import api.utils as number
 
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password
+
 
 class ProfileViewSet(viewsets.ModelViewSet):
     """
@@ -27,19 +28,34 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def create(self,request):
         resp = {'success': True}
+
+        # create user
+
         mobile_no = request.POST['mobile_no']
+
+        # step -1: create user
+        username = mobile_no
+        password = rand_str()
+        otp_number = password
+        user = User(username=username, password=make_password(password))
+        user.save()
+      
+        # step -2: create user profile
         state = request.POST['state']
         village = request.POST['village']
         district = request.POST['district']
         tehsil = request.POST['tehsil']
-        profile = UserProfile(mobile_no=mobile_no, state=state,village=village,district=district, tehsil=tehsil)
+        profile = UserProfile(user=user, 
+            otp_number=otp_number, mobile_no=mobile_no, 
+            state=state, village=village,district=district,
+            tehsil=tehsil)
         profile.save()
 
+        # step -3: send OTP via SMS
+        # todo
+
         if profile:
-            otp_number =number.rand_str()
-            print(otp_number)
-            resp['msg'] = 'Registeration Successful'
-       
+            resp['msg'] = 'Registeration Successful, OTP=%s' % otp_number      
         else:
             resp['success'] = False
             resp['msg'] = 'Registration Failed'
@@ -52,7 +68,6 @@ def login(request):
     user = authenticate(request, username=username, password=password)
     resp = {'success': True}
     if user:
-        number ==otp_number
         resp['msg'] = 'Login successful'
     else:
         resp['success'] = False
