@@ -84,12 +84,11 @@ class AddAnimalViewSet(viewsets.ModelViewSet):
 
     def create(self,request):
         resp = {'success': True}
-        name = request.POST['name']
         animal_type = request.POST['animal_type']
         tag_no = request.POST['tag_no']
         dob = request.POST['dob']
         stage = request.POST['stage']
-        add_animal = AddAnimal(name=name, animal_type=animal_type,tag_no=tag_no,dob=dob, stage=stage)
+        add_animal = AddAnimal(name=request.user, animal_type=animal_type,tag_no=tag_no,dob=dob, stage=stage)
         add_animal.save()
 
         if add_animal:
