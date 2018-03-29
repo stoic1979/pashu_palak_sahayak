@@ -1,1 +1,1 @@
-web: gunicorn tracker.wsgi  --log-file -
+web: gunicorn pashu_paalak_sahayak.wsgi  --log-file -
