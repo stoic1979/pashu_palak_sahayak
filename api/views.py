@@ -75,7 +75,7 @@ def login(request):
         resp['msg'] = 'Login successful'
     else:
         resp['success'] = False
-        resp['msg'] = 'Invalid userame or password'
+        resp['msg'] = 'Invalid username or password'
     return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
