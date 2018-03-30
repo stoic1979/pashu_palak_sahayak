@@ -93,7 +93,7 @@ class AddAnimalViewSet(viewsets.ModelViewSet):
             tag_no = request.POST['tag_no']
             dob = request.POST['dob']
             stage = request.POST['stage']
-            add_animal = AddAnimal(user=request.user,animal_type=animal_type,tag_no=tag_no,dob=dob, stage=stage)
+            add_animal = AddAnimal(animal_type=animal_type,tag_no=tag_no,dob=dob, stage=stage)
             add_animal.save()
 
             if add_animal:
@@ -101,11 +101,11 @@ class AddAnimalViewSet(viewsets.ModelViewSet):
            
             else:
                 resp['success'] = False
-                resp['msg'] = 'Failed to create record'
+                resp['msg'] = 'Failed to add animal'
 
         except Exception as exp:
             resp['success'] = False
-            resp['msg'] = 'Registration failed, exception: %s' % exp        
+            resp['msg'] = ' Failed, exception: %s' % exp        
         return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
