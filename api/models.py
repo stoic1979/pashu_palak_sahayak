@@ -40,7 +40,7 @@ class UserProfile(models.Model):
 
 
 class AddAnimal(models.Model):
-	name  = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+	user  = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
 	tag_no = models.IntegerField()
 	animal_type = models.CharField(max_length=50)
 	dob = models.DateField(auto_now=False, auto_now_add=False)
